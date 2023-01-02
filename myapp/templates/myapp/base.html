@@ -24,7 +24,7 @@
                     <a href="{% url 'myapp:Products' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold border-b-4 border-green-500"> Home </a>
                     <!-- myapp.add_product remove and add ProductCreateView for classbased view-->
                     <a href="{% url 'myapp:ProductCreateView' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Post and Add </a>
-                    <a href="{% url 'myapp:Products' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> View Products </a>
+                    <a href="{% url 'myapp:ProductListView' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> View Products </a>
                     <a href="" class="px-2 py-4 text-gray-500 text-lg font-semibold"> ListView Products </a>
                     <a href="" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Contact</a>
                     {% if user.is_authenticated %}

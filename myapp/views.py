@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
+
 # Create your views here.
 def index(request):
     return render(request,"myapp/index.html")
@@ -12,17 +14,30 @@ def index(request):
 def Products(request):
     # products=["iphone","nokia","samsung"]
     # print("List of Products")    
-    products = Product.objects.all()
+    page_obj = products = Product.objects.all()
+    
+    # Search product
+    product_name = request.GET.get('Product_name')
+    if product_name!='' and product_name is not None:
+        page_obj = products.filter(name__icontains=product_name)
+    
+    # pagination
+    paginator = Paginator(page_obj, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     # list derive from database
     # return HttpResponse(products)
-    context={'prod':products}
+    # context={'prod':products}
+    context={'page_obj':page_obj}
+
     return render(request,"myapp/index.html", context)
 
 # class based view for above products view[ListView]
-# class ProductListView(ListView):
-#     model=Product
-#     template_name="myapp/index.html"
-#     context_object_name='prod'
+class ProductListView(ListView):
+    model=Product
+    template_name="myapp/index.html"
+    context_object_name='prod'
+    paginate_by = 3
 
 def product_detail(request,id):
     products = Product.objects.get(id=id)
@@ -32,10 +47,11 @@ def product_detail(request,id):
     # return HttpResponse("Product id!: "+ str(id))
 
 # class based view for above products detail view[DetailView]
-# class ProductDetailView(DetailView):
-#     model=Product
-#     template_name="myapp/productdetail.html"
-#     context_object_name='prod'
+class ProductDetailView(DetailView):
+    model=Product
+    template_name="myapp/productdetail.html"
+    context_object_name='prod'
+  
 
 @login_required
 def add_product(request):

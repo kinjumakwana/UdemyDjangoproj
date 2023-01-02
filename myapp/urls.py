@@ -5,10 +5,10 @@ urlpatterns = [
     
     path('',index),
     path('Products/',Products, name="Products"),
-    # path('Products/',ProductListView.as_view(), name="ProductListView"),
+    path('Productss/',ProductListView.as_view(), name="ProductListView"),
 
-    path('Products/<int:id>',product_detail, name="product_detail"),
-    # path('Products/<int:pk>',ProductDetailView.as_view(), name="product_detail"),
+    # path('Products/<int:id>',product_detail, name="product_detail"),
+    path('Products/<int:pk>',ProductDetailView.as_view(), name="product_detail"),
     
     # path('Products/add',add_product, name="add_product"),
     path('Products/add',ProductCreateView.as_view(), name="ProductCreateView"),
