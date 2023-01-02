@@ -1,0 +1,49 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- site hero start here -->
+    <main class="mt-10 mx-auto max-w-7xl px-4 sm:st-12 sm:px-6 md:mt-60 lg:mt-20 lg:px-8 xl-mt-28">
+        <div class="sm:text-center lg:text-left">
+            <h1 class="text-4xl text-gray-900 font-extrabold sm:text-5xl md:text-6xl">
+                <span class="block xl:inline">Premium Products</span>
+                <span class="block text-green-500 xl:inline">Non-Premium Products </span>
+            </h1>
+            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                Get the best quality used Products
+            </p>
+        </div>
+    </main>
+    <!-- site hero end here -->
+    <div class="flex mt-5 p-10 justify-center">
+        <h2 class="text-3xl font-normal mt-0 mb-2 text-gray-500">Recent Products</h2>
+    </div>
+    <!-- card code -->
+    <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg: grid-cols-3 xl:grid-cols-4 gap-5">
+        {% for x in prod %}
+       
+        <!-- <h2>{{x.name}}</h2> - {{x.price}} -->
+        <!-- <a href="/Products/{{x.id}}"> -->
+            
+            <a href="{% url 'myapp:product_detail' x.id %}">
+                <div class="rounded overflow-hidden shadow-lg">
+                <img class="w-full" src="{{x.images.url}}">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> {{x.name}} </div>
+                        <div class="font-bold text-xl text-green-500 mb-2"> ${{x.price}} </div>
+                        <div class="font-bold text-xl text-gray-500 mb-2">Posted by: <span class="text-indigo-500">{{x.seller_name}}</span> </div>
+                        <p class="text-gray-700 text-base">{{x.desc}} </p>
+                    </div>
+                </div>
+               
+            </a>
+        
+        {% endfor %}
+    </div>
+    <!-- <h1> Welcome Render Product page</h1>
+    {{prod}}  -->
+    <!-- using loop access each elemt/use for loop -->
+    <!-- {{prod.name}} -->
+
+{% endblock %}

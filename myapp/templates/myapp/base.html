@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="{% static 'myapp/style.css' %}" type="text/css" /> -->
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}" type="text/css" />
+</head>
+<body>
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between ">
+                <div class="flex space-x-7">
+                    <a href="" class="flex px-2 py-4 items-center">
+                        <img class="h-8 w-8" src="{% static 'myapp/images/logo.png' %}">
+                        <span class="text-gray-500 text-lg font-semibold">Buy&Sell </span>
+                    </a>
+                
+                </div>
+                <div class=" flex items-center span-x-1">
+                    <a href="{% url 'myapp:Products' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold border-b-4 border-green-500"> Home </a>
+                    <!-- myapp.add_product remove and add ProductCreateView for classbased view-->
+                    <a href="{% url 'myapp:ProductCreateView' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Post and Add </a>
+                    <a href="{% url 'myapp:Products' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> View Products </a>
+                    <a href="" class="px-2 py-4 text-gray-500 text-lg font-semibold"> ListView Products </a>
+                    <a href="" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Contact</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'users:profile' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Profile </a>
+                    <a href="{% url 'myapp:mylistings' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> My Listings </a>
+                    <a href="{% url 'users:logout' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Logout </a>
+                    {% else %}
+                    <a href="{% url 'users:login' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Login </a>/ 
+                    <a href="{% url 'users:sign_up' %}" class="px-2 py-4 text-gray-500 text-lg font-semibold"> Sign up </a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

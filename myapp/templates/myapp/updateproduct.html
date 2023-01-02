@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold m-10 ">Update Product </h1>
+<form class="bg-white shadow-md m-10 px-8" method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Cross Site Request Forgery-->
+    <div class="p-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Product Name: </label>
+        <input class="shadow apperence-none border rounded py-2 px-3 mr-10" value={{prod.name}} type="text" placeholder="Name" name="name" id="name">
+    </div>
+    <div class="p-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Product Price: </label>
+        <input class="shadow apperence-none border rounded py-2 px-3 mr-10" value={{prod.price}} type="text" placeholder="Price" name="price" id="price">
+    </div>
+    
+    <div class="p-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Product Description: </label>
+        <input class="shadow apperence-none border rounded py-2 px-3 mr-10" value={{prod.desc}} type="text" placeholder="Description" name="desc" id="desc">
+    </div>
+    <div class="p-3">
+        <img class="w-20 h-20" src="{{prod.images.url}}">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Product Image: </label>
+        <input class="shadow apperence-none border rounded py-2 px-3 mr-10" type="file" accept="images/*" name="upload" id="upload">
+    </div>
+    <div class="p-3">
+        
+        <input class="shadow apperence-none border rounded py-2 px-3 mr-10 bg-green-500" type="submit" name="Update Product" value="Update Product">
+    </div>
+</form>
+{% endblock %}

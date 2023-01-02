@@ -1,0 +1,18 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold m-10 ">Delete Product </h1>
+<form class="bg-white shadow-md m-10 px-8" method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Cross Site Request Forgery-->
+    <div class="p-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Are you sure to delete this Product: {{ object }}</label>
+              
+    </div>
+    <div class="p-3">
+        
+        <input class="shadow apperence-none border rounded py-2 px-3 mr-10 bg-green-500" type="submit" name="Delete Product" value="Delete Product">
+        <a href="{% url 'myapp:Products' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}
